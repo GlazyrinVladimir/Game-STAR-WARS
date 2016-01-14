@@ -62,17 +62,14 @@ void playing(RenderWindow &window,Clock &clock,View &view,PLAYER &Player, std::l
 
 			definition_of_the_platform(it, Player, entities, lvl, time);
 
-			if ((*it)->Health <= 0) continue;
-
-			
+			if ((*it)->Health <= 0) continue;			
 		}
-
-		
 
 		view.setCenter(Player.x, Player.y);
 		window.setView(view);		
 
 		draw_game(window, lvl, it, entities, Player, plScores);
+	
 	}
 }
 

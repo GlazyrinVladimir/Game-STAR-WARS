@@ -10,12 +10,12 @@ void init_map_objects(std::vector<Object> &e, std::list<Entity*> &entities, Anim
 	e = lvl.GetObjects("enemy_clon");
 
 	for (int i = 0;i < e.size();i++)
-		entities.push_back(new ENEMY_CLON(anim_clon_enemy, "enemy_clon", lvl, e[i].rect.left, e[i].rect.top, 1));
+		entities.push_back(new ENEMY_CLON(anim_clon_enemy, "enemy_clon", lvl, e[i].rect.left, e[i].rect.top));
 
 	e = lvl.GetObjects("enemy_droid");
 
 	for (int i = 0;i < e.size();i++)
-		entities.push_back(new ENEMY_CLON(anim_droid_enemy, "enemy_droid", lvl, e[i].rect.left, e[i].rect.top, 1));
+		entities.push_back(new ENEMY_CLON(anim_droid_enemy, "enemy_droid", lvl, e[i].rect.left, e[i].rect.top));
 
 	e = lvl.GetObjects("MovingPlatform");
 	for (int i = 0;i < e.size();i++)

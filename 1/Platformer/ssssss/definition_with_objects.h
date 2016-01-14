@@ -12,19 +12,16 @@ using namespace sf;
 
 void definition_of_the_enemy(std::list<Entity*>::iterator &it, PLAYER &Player, AnimationManager &anim_bullet, std::list<Entity*> &entities, Level &lvl, float &time)
 {
-	//1. враги
 	Entity *enemy = *it;
 
 	if ((*it)->Name == "enemy_clon")
 	{
 		interaction_with_enemy_clon(Player, anim_bullet, entities, it, lvl, time);
-
 	}
 	if ((*it)->Name == "enemy_droid")
 	{
 		interaction_with_enemy_droid(Player, anim_bullet, entities, it, lvl, time);
 	}
-
 }
 
 void definition_of_the_platform(std::list<Entity*>::iterator &it, PLAYER &Player, std::list<Entity*> &entities, Level &lvl, float &time)

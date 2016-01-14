@@ -11,20 +11,19 @@ public:
 	float x, y, dx, dy, w, h;
 	AnimationManager anim;
 	std::vector<Object> obj;
-	bool life, dir, repulse = false, hit = false;
+	bool life, dir, repulse = false, hit = false, isChangePosition = false;
 	float timer, attack_timer, timer_anim_dead;
 	String Name;
 	int Health, pos;
 	float shootTime_clon = 0;
 	float shootTime_droid = 0;
+	int pos_Player;
 
-	Entity(AnimationManager &A, int X, int Y, int pos)
+	Entity(AnimationManager &A, int X, int Y)
 	{
-
 		anim = A;
 		x = X;
 		y = Y;
-		dir = 1;
 		life = true;
 		timer = 0;
 		timer_anim_dead = 0;
@@ -59,7 +58,7 @@ class Bullet :public Entity
 {
 public:
 	int last_dir;
-	Bullet(AnimationManager &a, Level &lev, int x, int y, bool dir) :Entity(a, x, y, pos)
+	Bullet(AnimationManager &a, Level &lev, int x, int y, bool dir) :Entity(a, x, y)
 	{
 		option("Bullet", 0.3, 10, "move");
 
@@ -86,12 +85,12 @@ public:
 			anim.set("explode");dx = 0;
 			if (anim.isPlaying() == false) life = false;
 		}
+
 		if (repulse == true)
 		{
 			if (last_dir == 1) { dx = 0.4; }
 			if (last_dir == 0) { dx = -0.4; }
 		}
-
 		anim.tick(time);
 	}
 
@@ -104,7 +103,7 @@ public:
 	bool onLadder, shoot = false, hit, superAttack = false;
 	std::map<std::string, bool> key;
 
-	PLAYER(AnimationManager &a, Level &lev, int x, int y) :Entity(a, x, y, pos)
+	PLAYER(AnimationManager &a, Level &lev, int x, int y) :Entity(a, x, y)
 	{
 		option("Player", 0, 100, "stay");
 		STATE = stay; hit = 0;
@@ -287,18 +286,13 @@ class ENEMY_CLON : public Entity
 {
 public:
 	enum { walk, attack, stay } STATE;
-	bool shoot = false;
-	bool onGround = false;
-	bool isStay = false;
 	int stayTime = 0;
-	bool hit = false;
-	float hitTime;
-	float shootTime_clon = 0;
-	float shootTime_droid = 0;
-	int hitTimeClon = 50;
+	int hitTime = 0;
+	int hitTimeClon = 100;
 	int hitTimeDroid = 100;
+	int kek;
 
-	ENEMY_CLON(AnimationManager &a, String Name, Level &lev, int x, int y, int pos) :Entity(a, x, y, hit)
+	ENEMY_CLON(AnimationManager &a, String Name, Level &lev, int x, int y) :Entity(a, x, y)
 	{
 		obj = lev.GetAllObjects();
 		if (Name == "enemy_clon")
@@ -309,7 +303,6 @@ public:
 		{
 			option("enemy_droid", 0.04, 40, "walk");
 		}
-
 
 	}
 
@@ -334,57 +327,51 @@ public:
 
 	void keyCheck()
 	{
-		if (dx != 0) { anim.set("walk"); }
-		else { anim.set("attack"); }
+	if (dx != 0) { anim.set("walk"); }
+		else { anim.set("attack"); }		
 
+		//{ std::cout << "new (*it)->x" << "kek" << "\n"; }
 		if (dir) { anim.flip(1); }
 		else { anim.flip(0); }
 	}
 
-	void getHit(int count)
+	void getHit(float time)
 	{
-		if (dx == 0)
-			if (hit == true)
-			{
-				hitTime += 1;
-				if (hitTime < count)
-				{
-					anim.set("hit");
-				}
-				else
-				{
-					anim.set("attack");
-					hit = false;
-					hitTime = 0;
-				}
-			}
-			else anim.set("attack");
+		if (hit) {
+			hitTimeClon += time;
+			if (hitTimeClon > 500) { hit = false; hitTimeClon = 0; }
+			else anim.set("hit");
+		}
 	}
 
 	void update(float time)
 	{
+		
+	//	std::cout << "new (*it)->x" << pos_Player << "\n";
 		if (Name == "enemy_clon")
 		{
-			keyCheck();
+			
 			x += dx * time;
 			y += dy * time;
 			Collision();
 			timer += dx;
-
+			
 			if (timer > 30 || timer < -30)
 			{
 				dx *= -1;
-				timer = 0;
+				timer = 0;			
 				if (dx > 0) { dir = 1; }
 				else { dir = 0; }
 			}
-
-		//	getHit(hitTimeClon);
+			
+			keyCheck();
+			
+			getHit(time);
 
 			if (Health <= 0)
 			{
 				timer_anim_dead += time;
-				if (timer_anim_dead > 2000) { life = false; timer_anim_dead = 0; }
+				if (timer_anim_dead > 1000) { life = false; timer_anim_dead = 0; }
 				else anim.set("dead");
 			}
 
@@ -395,14 +382,8 @@ public:
 			keyCheck();
 			x += dx * time;
 			Collision();
-			
-		/*	if (hit)
-			{			
-				hitTime += 1;
-				if (hitTime > 40) { hit = false; hitTime = 0; }
-			}*/
 
-			getHit(hitTimeDroid);
+			getHit(time);
 
 			if (Health <= 0)
 			{
@@ -417,7 +398,7 @@ public:
 class MovingPlatform : public Entity
 {
 public:
-	MovingPlatform(AnimationManager &a, Level &lev, String Name, int x, int y) :Entity(a, x, y, pos)
+	MovingPlatform(AnimationManager &a, Level &lev, String Name, int x, int y) :Entity(a, x, y)
 	{
 		obj = lev.GetAllObjects();
 		if (Name == "MovingPlatform")

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="75" height="30" tilewidth="32" tileheight="32" nextobjectid="141">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="75" height="30" tilewidth="32" tileheight="32" nextobjectid="151">
  <tileset firstgid="1" name="spacegame_tileset_by_kaiseto-d53qzyv" tilewidth="32" tileheight="32" tilecount="300">
   <image source="spacegame_tileset_by_kaiseto-d53qzyv.png" width="640" height="480"/>
  </tileset>
@@ -2297,9 +2297,7 @@
   <object id="98" name="Up" x="1856" y="160" width="32" height="32"/>
   <object id="100" name="solid" x="640" y="672" width="64" height="27"/>
   <object id="101" name="solid" x="96" y="640" width="64" height="64"/>
-  <object id="117" name="player" gid="39" x="320" y="160" width="32" height="32"/>
-  <object id="130" name="enemy_droid" gid="36" x="1440" y="280" width="32" height="32"/>
-  <object id="135" name="enemy_clon" gid="36" x="800" y="398" width="32" height="32"/>
+  <object id="117" name="player" gid="39" x="512" y="416" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="Враг">
   <object id="104" name="back" x="1088" y="352" width="33" height="96"/>
@@ -2311,5 +2309,6 @@
   <object id="110" name="back" x="828.5" y="-2" width="33" height="96"/>
   <object id="111" name="back" x="1091.5" y="0" width="33" height="96"/>
   <object id="114" name="back" x="448" y="352" width="33" height="96"/>
+  <object id="150" name="enemy_clon" gid="36" x="288" y="654" width="32" height="32"/>
  </objectgroup>
 </map>

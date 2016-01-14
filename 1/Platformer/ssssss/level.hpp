@@ -107,7 +107,8 @@ bool Level::LoadFromFile(std::string filename)
     }
 
 
-    img.createMaskFromColor(sf::Color(255, 255, 255));
+	 img.createMaskFromColor(sf::Color(255, 255, 255));
+	//img.createMaskFromColor(sf::Color(75, 50, 167));
 	tilesetImage.loadFromImage(img);
     tilesetImage.setSmooth(false);
 

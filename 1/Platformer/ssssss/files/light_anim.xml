@@ -1,0 +1,12 @@
+<!DOCTYPE SpriteDecomposer>
+<sprites image="light.png" transparentColor="3039">
+ <animation title="move" delay="150">
+  <cut w="49" x="18" y="67" h="37" row="1" col="1"/>
+ </animation>
+ <animation title="explode" delay="150">
+  <cut w="40" x="80.5" y="18" h="86" row="1" col="1"/>
+  <cut w="46" x="134" y="18" h="86" row="1" col="1"/>
+  <cut w="56" x="194" y="17.5" h="87" row="1" col="1"/>
+  <cut w="63" x="267" y="17" h="87" row="1" col="1"/>
+ </animation>
+</sprites>

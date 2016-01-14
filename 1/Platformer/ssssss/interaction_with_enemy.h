@@ -12,21 +12,20 @@
 
 using namespace sf;
 
-void interaction_with_enemy_clon(PLAYER &Player, AnimationManager &anim2, std::list<Entity*> &entities, std::list<Entity*>::iterator &it, Level &lvl, float &time)
+void interaction_with_enemy_clon(PLAYER &Player, AnimationManager &anim2, std::list<Entity*> &entities, std::list<Entity*>::iterator &it, Level &lvl, float &time, Sound &shoot)
 {
 	float distance;
 
 	if (Keyboard::isKeyPressed(Keyboard::Space))
 	{
-		if (!(Player.getRect().intersects((*it)->getRect())))
+
+		if (Player.getRectAttLeft().intersects((*it)->getRect()) || Player.getRectAttRight().intersects((*it)->getRect()))
 		{
-			if (Player.getRectAttLeft().intersects((*it)->getRect()) || Player.getRectAttRight().intersects((*it)->getRect()))
-			{
-				(*it)->dx = 0;
-				(*it)->Health = 0;
-			}
+			(*it)->dx = 0;
+			(*it)->Health = 0;
 		}
-		else
+
+		if (Player.getRect().intersects((*it)->getRect()))
 		{
 			(*it)->dx = 0;
 			(*it)->Health = 0;
@@ -35,26 +34,26 @@ void interaction_with_enemy_clon(PLAYER &Player, AnimationManager &anim2, std::l
 
 	distance = sqrt((Player.x - (*it)->x)*(Player.x - (*it)->x));
 
-	if ((distance < 170) && (((*it)->y + 50 >= Player.y) && ((*it)->y - 85 <= Player.y))) { (*it)->shootTime_clon += 0.005*time; }
+	if ((distance < 240) && (((*it)->y + 50 >= Player.y) && ((*it)->y - 95 <= Player.y))) { (*it)->shootTime_clon += 0.005*time; }
 
-	if ((distance < 170) && (((*it)->y + 50 >= Player.y) && ((*it)->Health > 0) && ((*it)->y - 85 <= Player.y)))
+	if ((distance < 240) && (((*it)->y + 50 >= Player.y) && ((*it)->Health > 0) && ((*it)->y - 95 <= Player.y)) && Player.Health > 0)
 	{
-		if ((*it)->shootTime_clon > 7)
+		if ((*it)->shootTime_clon > 6)
 		{
 			if (Player.x < (*it)->x) {
 				
 				(*it)->dir = 0;
-				
 				 entities.push_back(new Bullet(anim2, lvl, (*it)->x, (*it)->y + 18, 1));
+				 shoot.play();
 				//std::cout << "new (*it)->x" << (*it)->pos_Player << "\n";
 				 
 			}
 			else
 			{
 				(*it)->dir = 1;
-
 				//std::cout << "new (*it)->x" << (*it)->pos_Player << "\n";
 				  entities.push_back(new Bullet(anim2, lvl, (*it)->x, (*it)->y + 18, 0));
+				  shoot.play();
 			}
 			(*it)->shootTime_clon = 0;
 			(*it)->dx = 0;
@@ -97,62 +96,62 @@ void interaction_with_enemy_clon(PLAYER &Player, AnimationManager &anim2, std::l
 	}
 }
 
-void interaction_with_enemy_droid(PLAYER &Player, AnimationManager &anim2, std::list<Entity*> &entities, std::list<Entity*>::iterator &it, Level &lvl, float &time)
+void interaction_with_enemy_droid(PLAYER &Player, AnimationManager &anim2, std::list<Entity*> &entities, std::list<Entity*>::iterator &it, Level &lvl, float &time, Sound &shoot)
 {
+
 	float distance;
 
 	if (Keyboard::isKeyPressed(Keyboard::Space))
 	{
-		if (!(Player.getRect().intersects(((*it))->getRect())))
+
+		if ((Player.getRectAttLeft().intersects((*it)->getRect()) || Player.getRectAttRight().intersects((*it)->getRect())) && ((*it)->hit == false))
 		{
-			if (Player.getRectAttLeft().intersects((*it)->getRect()) || Player.getRectAttRight().intersects((*it)->getRect()))
-			{
-				(*it)->dx = 0;
-				(*it)->Health -= 15;
-			}
-		}
-		else
-		{
-			Player.Health -= 5;
-			Player.hit = true;
 			(*it)->dx = 0;
-			(*it)->Health -= 15;
+			(*it)->Health -= 10;
+			(*it)->hit = true;
+		}
+		if (Player.getRect().intersects((*it)->getRect()) && ((*it)->hit == false))
+		{
+			(*it)->dx = 0;
+			(*it)->Health -= 10;
+			(*it)->hit = true;
 		}
 	}
-	else
-		if (Player.getRect().intersects((*it)->getRect()) && (!Player.hit))
-		{
-			Player.Health -= 5;
-			(*it)->hit = true;
-			Player.hit = true;
-		}
 
 	distance = sqrt((Player.x - (*it)->x)*(Player.x - (*it)->x));
 
-	if ((distance < 170) && (((*it)->y >= Player.y) && ((*it)->y - 90 <= Player.y))) { (*it)->shootTime_droid += 0.005*time; }
+	if ((distance < 170) && (((*it)->y + 50 >= Player.y) && ((*it)->y - 105 <= Player.y))) { (*it)->shootTime_clon += 0.005*time; }
 
-	if ((distance < 170) && (((*it)->y >= Player.y) && ((*it)->Health > 0) && ((*it)->y - 90 <= Player.y)))
+	if ((distance < 170) && (((*it)->y + 50 >= Player.y) && ((*it)->Health > 0) && ((*it)->y - 105 <= Player.y)) && Player.Health > 0)
 	{
-
-		if ((*it)->shootTime_droid > 4)
+		
+		if ((*it)->shootTime_clon > 4)
 		{
-			(*it)->pos = 1;
-
 			if (Player.x < (*it)->x) {
-				(*it)->dir == 1; entities.push_back(new Bullet(anim2, lvl, (*it)->x, (*it)->y + 18, 1));
+
+				(*it)->dir = 0;
+				(*it)->dx = 0;
+				entities.push_back(new Bullet(anim2, lvl, (*it)->x, (*it)->y + 18, 1));
+				shoot.play();
+				//std::cout << "new (*it)->x" << (*it)->pos_Player << "\n";
+
 			}
-			else {
-				(*it)->dir == 0; entities.push_back(new Bullet(anim2, lvl, (*it)->x, (*it)->y + 18, 0));
+			else
+			{
+				(*it)->dir = 1;
+				(*it)->dx = 0;
+				//std::cout << "new (*it)->x" << (*it)->pos_Player << "\n";
+				entities.push_back(new Bullet(anim2, lvl, (*it)->x, (*it)->y + 18, 0));
+				shoot.play();
 			}
-			(*it)->shootTime_droid = 0;
-			(*it)->dx = 0;
+			(*it)->shootTime_clon = 0;
+
 		}
 	}
 	else
-		if ((*it)->pos == 1)
+		if ((*it)->dx == 0)
 		{
-			(*it)->dx = 0.04;
-			(*it)->pos = 0;
+			(*it)->dx = 0.02;
 			(*it)->timer = 0;
 		}
 
@@ -162,12 +161,11 @@ void interaction_with_enemy_droid(PLAYER &Player, AnimationManager &anim2, std::
 		if ((*it2)->Name == "Bullet")
 			if ((*it2)->life == true)
 			{
-
-				if ((*it2)->getRect().intersects(Player.getRect()) && ((*it2)->repulse == false))
+				if ((*it2)->getRect().intersects(Player.getRect()))
 				{
 					if (Keyboard::isKeyPressed(Keyboard::Down))
 					{
-						(*it2)->repulse = true;						
+						(*it2)->repulse = true;
 					}
 					else
 					{
@@ -180,10 +178,8 @@ void interaction_with_enemy_droid(PLAYER &Player, AnimationManager &anim2, std::
 				{
 					(*it2)->repulse = false;
 					(*it2)->life = false;
-
+					(*it)->hit = true;
 				}
 			}
 	}
-
-	
 }

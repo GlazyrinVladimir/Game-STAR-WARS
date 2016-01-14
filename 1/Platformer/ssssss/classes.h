@@ -96,11 +96,51 @@ public:
 
 };
 
+class light :public Entity
+{
+public:
+	int last_dir;
+	light(AnimationManager &a, Level &lev, int x, int y, bool dir) :Entity(a, x, y)
+	{
+		option("light", 0.3, 10, "move");
+
+		if (dir) { dx = -0.3; anim.flip(1); last_dir = 1; }
+		else { last_dir = 0; anim.flip(0);}
+		obj = lev.GetObjects("solid");
+	}
+
+	void update(float time)
+	{
+		x += dx*time;
+
+		for (int i = 0;i < obj.size();i++)
+		{
+			if (getRect().intersects(obj[i].rect))
+			{
+				Health = 0;
+			}
+		}
+		if (!life) { Health = 0; }
+
+		if (Health <= 0) 
+		{
+			timer += time;
+			if (timer > 1000) { life = false; timer = 0; }
+			else { anim.set("explode"); dx = 0; }		
+		}
+
+		anim.tick(time);
+	}
+};
+
 class PLAYER : public Entity
 {
 public:
 	enum { stay, walk, duck, jump, climb, swim, dead } STATE;
 	bool onLadder, shoot = false, hit, superAttack = false;
+	int mana = 1;
+	int supAttackTimer = 0;
+	int levelNumber = 0;
 	std::map<std::string, bool> key;
 
 	PLAYER(AnimationManager &a, Level &lev, int x, int y) :Entity(a, x, y)
@@ -112,61 +152,60 @@ public:
 
 	void KeyCheck(float time)
 	{
-		if (key["L"])
+		if (STATE != dead)
 		{
-			dir = 1;
-			if (STATE != duck) dx = -0.1;
-			if (STATE == stay) STATE = walk;
-		}
+			if (key["L"])
+			{
+				dir = 1;
+				if (STATE != duck) dx = -0.08;
+				if (STATE == stay) STATE = walk;
+			}
 
-		if (key["R"])
-		{
-			dir = 0;
-			if (STATE != duck) dx = 0.1;
-			if (STATE == stay) STATE = walk;
-		}
+			if (key["R"])
+			{
+				dir = 0;
+				if (STATE != duck) dx = 0.08;
+				if (STATE == stay) STATE = walk;
+			}
 
-		if (key["Up"])
-		{
-			if (onLadder) STATE = climb;
-			if (STATE == stay || STATE == walk) { dy = -0.27; STATE = jump; anim.play("jump"); }
-		}
+			if (key["Up"])
+			{
+				if (onLadder) STATE = climb;
+				if (STATE == stay || STATE == walk) { dy = -0.29; STATE = jump; anim.play("jump"); }
+			}
 
 
-		if (key["Down"])
-		{
-			if (STATE == stay || STATE == walk) { STATE = duck; dx = 0; }
-		}
+			if (key["Down"])
+			{
+				if (STATE == stay || STATE == walk) { STATE = duck; dx = 0; }
+			}
 
-		if (key["Space"])
-		{
-			shoot = true;
-		}
+			if (key["Space"])
+			{
+				shoot = true;
+			}
 
-		if (key["Alt"])
-		{
-			superAttack = true;
-		}
+			if (key["Alt"] && STATE != jump)
+			{
+				superAttack = true;
+			}
 
-		if (!(key["R"] || key["L"]))
-		{
-			dx = 0;
-			if (STATE == walk) STATE = stay;
-		}
+			if (!(key["R"] || key["L"]))
+			{
+				dx = 0;
+				if (STATE == walk) STATE = stay;
+			}
 
-		if (!(key["Up"] || key["Down"]))
-		{
-			if (STATE == swim || STATE == climb) dy = 0;
-		}
+			if (!(key["Up"] || key["Down"]))
+			{
+				if (STATE == swim || STATE == climb) dy = 0;
+			}
 
-		if (!key["Down"])
-		{
-			if (STATE == duck) { STATE = stay; }
-		}
+			if (!key["Down"])
+			{
+				if (STATE == duck) { STATE = stay; }
+			}
 
-		if (!key["Alt"])
-		{
-			superAttack = false;
 		}
 	}
 
@@ -174,7 +213,7 @@ public:
 	{
 		KeyCheck(time);
 
-		if (STATE == stay) anim.set("stay");
+		if (STATE == stay && life == true) anim.set("stay");
 		if (STATE == walk) anim.set("walk");
 		if (STATE == jump) anim.set("jump");
 		if (STATE == duck) anim.set("duck");
@@ -190,7 +229,7 @@ public:
 		if (STATE == walk && shoot)
 		{
 			timer += time;
-			if (timer > 600) { shoot = false; timer = 0; }
+			if (timer > 800) { shoot = false; timer = 0; }
 			else anim.set("shootAndWalk");
 		}
 
@@ -201,15 +240,28 @@ public:
 			else anim.set("JumpAttack");
 		}
 
-		if (hit) {
+		if (Health <= 0 && life == true)
+		{
+			dx = 0; dy = 0;
+			timer += time;
+			if (timer > 500) { life = false; timer = 0; anim.set("lie"); }
+			else { hit = false; anim.set("dead"); STATE = dead; }
+		}
+
+		if (hit && Health > 0) {
 			timer += time;
 			if (timer > 600) { hit = false; timer = 0; }
 			else anim.set("hit");
 		}
 
-		if (dir) anim.flip();
+		if (superAttack)
+		{
+			supAttackTimer += time;
+			if (supAttackTimer > 1300) { superAttack = false; supAttackTimer = 0; }
+			else { anim.set("light_shoot"); dx = 0; dy = 0; }
+		}
 
-		if (superAttack) { dx = 0; anim.set("supAtt"); }
+		if (dir) anim.flip();
 
 		x += dx * time;
 		Collision(0);
@@ -218,18 +270,11 @@ public:
 		y += dy*time; onLadder = false;
 		Collision(1);
 
-		if (Health <= 0)
-		{
-			dx = 0; dy = 0;
-			timer += time;
-			if (timer > 600) { life = false; timer = 0; }
-			else anim.set("dead");
-		}
-
 		anim.tick(time);
 
 		key["R"] = key["L"] = key["Up"] = key["Down"] = key["Alt"] = key["Space"] = false;
 	}
+
 
 	void Collision(int num)
 	{
@@ -237,6 +282,7 @@ public:
 		for (int i = 0;i<obj.size();i++)
 			if (getRect().intersects(obj[i].rect))
 			{
+				if (obj[i].name == "nextLevel" ) { levelNumber = 1; }
 				if (obj[i].name == "solid")
 				{
 					if (dy>0 && num == 1) { y = obj[i].rect.top - h;  dy = 0;   STATE = stay; }
@@ -273,12 +319,12 @@ public:
 
 	FloatRect getRectAttLeft()
 	{
-		return FloatRect(x + 5, y, w, h);
+		return FloatRect(x, y, -w + 20, h);;
 	}
 
 	FloatRect getRectAttRight()
 	{
-		return FloatRect(x + 15, y, w, h);
+		return FloatRect(x, y, w + 20, h);
 	}
 };
 
@@ -288,9 +334,8 @@ public:
 	enum { walk, attack, stay } STATE;
 	int stayTime = 0;
 	int hitTime = 0;
-	int hitTimeClon = 100;
-	int hitTimeDroid = 100;
-	int kek;
+	int hitTimeClon = 150;
+	int hitTimeDroid = 250;
 
 	ENEMY_CLON(AnimationManager &a, String Name, Level &lev, int x, int y) :Entity(a, x, y)
 	{
@@ -301,7 +346,8 @@ public:
 		}
 		if (Name == "enemy_droid")
 		{
-			option("enemy_droid", 0.04, 40, "walk");
+			anim.flip();
+			option("enemy_droid", 0.04, 60, "walk");
 		}
 
 	}
@@ -331,28 +377,53 @@ public:
 		else { anim.set("attack"); }		
 
 		//{ std::cout << "new (*it)->x" << "kek" << "\n"; }
+		if (dx > 0) anim.flip(1);
+		else if (dx < 0) anim.flip(0);
+		else
 		if (dir) { anim.flip(1); }
 		else { anim.flip(0); }
 	}
 
 	void getHit(float time)
 	{
-		if (hit) {
-			hitTimeClon += time;
-			if (hitTimeClon > 500) { hit = false; hitTimeClon = 0; }
-			else anim.set("hit");
+		if (hit) 
+		{
+			if (Name == "enemy_clon")
+			{
+				hitTimeClon += time;
+				if (hitTimeClon > 500) { hit = false; hitTimeClon = 0; }
+				else
+					if (dir) anim.set("right_hit");
+					else anim.set("left_hit");
+			}
+			if (Name == "enemy_droid")
+			{
+				hitTimeDroid += time;
+				if (hitTimeDroid > 500) { hit = false; hitTimeDroid = 0; }
+				else
+					if (dir) anim.set("right_hit");
+					else anim.set("left_hit");
+			}
+		}
+	}
+
+	void dead(float time)
+	{
+		if (Health <= 0)
+		{
+			timer_anim_dead += time;
+			if (timer_anim_dead > 1200) { life = false; timer_anim_dead = 0; }
+			else anim.set("dead");
 		}
 	}
 
 	void update(float time)
 	{
-		
-	//	std::cout << "new (*it)->x" << pos_Player << "\n";
 		if (Name == "enemy_clon")
 		{
 			
 			x += dx * time;
-			y += dy * time;
+
 			Collision();
 			timer += dx;
 			
@@ -368,27 +439,21 @@ public:
 			
 			getHit(time);
 
-			if (Health <= 0)
-			{
-				timer_anim_dead += time;
-				if (timer_anim_dead > 1000) { life = false; timer_anim_dead = 0; }
-				else anim.set("dead");
-			}
+			dead(time);
 
 			anim.tick(time);
 		}
 		if (Name == "enemy_droid")
 		{
-			keyCheck();
+	//		std::cout << "new (*it)->x" << Health << "\n";
 			x += dx * time;
 			Collision();
 
-			getHit(time);
+			keyCheck();
 
-			if (Health <= 0)
-			{
-				life = false;
-			}
+			getHit(time);
+			
+			dead(time);
 
 			anim.tick(time);
 		}
@@ -433,40 +498,74 @@ public:
 class PlayerScores
 {
 public:
-	Texture t;
-	Sprite s;
+	Texture t, textureMana;
+	Image i, imageMana;
+	Sprite s, spriteMana;
 	int max;
-	RectangleShape bar;
+	int change;
+	float removal = 0;
 
 	PlayerScores()
 	{
-		t.loadFromFile("files/megaman_bullets.png");
+		i.loadFromFile("files/laser_blade2.png");
+		imageMana.loadFromFile("files/laserBlade.png");
+		t.loadFromImage(i);
+		textureMana.loadFromImage(imageMana);
 		s.setTexture(t);
-		s.setTextureRect(IntRect(783, 2, 15, 84));
-
-		bar.setFillColor(Color(0, 0, 0));
+		spriteMana.setTexture(textureMana);
+		s.setScale(0.15f, 0.15f);
+		spriteMana.setScale(0.15f, 0.15f);
+		s.setRotation(90);
 		max = 100;
 	}
 
-	void update(int k)
+	void update(int k, int mana)
 
 	{
-		if (k>0)
-			if (k<max)
-				bar.setSize(Vector2f(10, (max - k) * 70 / max));
-
+		if (k > 0)
+			{
+				change = max - k;
+				max = k;
+				removal += change * 5.7;
+				s.setTextureRect(IntRect(0, removal, 336, 800));			
+			}
+		if (mana == 1) spriteMana.setTextureRect(IntRect(0, 0, 800, 240));	
+		else spriteMana.setTextureRect(IntRect(0, 0, 220, 240));
 	}
 
 	void draw(RenderWindow &window)
 	{
 		Vector2f center = window.getView().getCenter();
 		Vector2f size = window.getView().getSize();
-
-		s.setPosition(center.x - size.x / 2 + 10, center.y - size.y / 2 + 10);
-		bar.setPosition(center.x - size.x / 2 + 14, center.y - size.y / 2 + 14);
-
+		
+		s.setPosition(center.x - size.x / 2 + 120 - removal / 6.7, center.y - size.y / 2);
+		spriteMana.setPosition(center.x - size.x / 2 - 2, center.y - size.y / 2 + 30);
 		window.draw(s);
-		window.draw(bar);
+		window.draw(spriteMana);
+	}
+};
+
+class Bonus :public Entity
+{
+public:
+	Bonus(AnimationManager &a, Level &lev, String Name, int x, int y) :Entity(a, x, y)
+	{
+		obj = lev.GetAllObjects();
+		if (Name == "Health")
+		{
+			option("Health", 0, 1, "move");
+		}
+		if (Name == "Mana")
+		{
+			option("Mana", 0, 1, "move");
+		}
+	}
+
+	void update(float time)
+	{
+		if (!life) { Health = 0; }
+
+		anim.tick(time);
 	}
 
 };

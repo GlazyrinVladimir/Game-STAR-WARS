@@ -1,0 +1,72 @@
+﻿Сборка начата 21.12.2015 10:40:59.
+     1>Проект "C:\тп сдавать\1\Platformer\ssssss\ssssss.vcxproj" в узле 2 (целевые объекты Build).
+     1>ClCompile:
+         C:\Program Files (x86)\VS\VC\bin\CL.exe /c /I"C:\SFML-Visual_Studio2015RCx32\include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_DYNAMIC /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+     1>c:\тп сдавать\1\platformer\ssssss\level.hpp(60): warning C4244: return: преобразование "double" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\level.hpp(144): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\level.hpp(145): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\level.hpp(185): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\level.hpp(242): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\level.hpp(263): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\level.hpp(264): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\level.hpp(265): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\level.hpp(266): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\level.hpp(309): warning C4018: <: несоответствие типов со знаком и без знака
+     1>c:\тп сдавать\1\platformer\ssssss\level.hpp(318): warning C4018: <: несоответствие типов со знаком и без знака
+     1>c:\тп сдавать\1\platformer\ssssss\level.hpp(340): warning C4018: <: несоответствие типов со знаком и без знака
+     1>c:\тп сдавать\1\platformer\ssssss\level.hpp(341): warning C4018: <: несоответствие типов со знаком и без знака
+     1>c:\тп сдавать\1\platformer\ssssss\anim.hpp(35): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\anim.hpp(68): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\anim.hpp(96): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\anim.hpp(112): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\anim.hpp(131): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\anim.hpp(148): warning C4244: return: преобразование "int" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\anim.hpp(150): warning C4244: return: преобразование "int" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(26): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(27): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(42): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(68): warning C4305: аргумент: усечение из "double" к "float"
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(70): warning C4305: =: усечение из "double" к "float"
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(79): warning C4018: <: несоответствие типов со знаком и без знака
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(116): warning C4305: =: усечение из "double" к "float"
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(123): warning C4305: =: усечение из "double" к "float"
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(130): warning C4305: =: усечение из "double" к "float"
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(137): warning C4305: =: усечение из "double" к "float"
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(223): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(235): warning C4018: <: несоответствие типов со знаком и без знака
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(250): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(253): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(258): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(261): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(287): warning C4305: аргумент: усечение из "double" к "float"
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(355): warning C4305: аргумент: усечение из "double" к "float"
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(373): warning C4305: аргумент: усечение из "double" к "float"
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(409): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(455): warning C4305: аргумент: усечение из "double" к "float"
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(464): warning C4018: <: несоответствие типов со знаком и без знака
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(465): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(468): warning C4018: <: несоответствие типов со знаком и без знака
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(469): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(472): warning C4018: <: несоответствие типов со знаком и без знака
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(473): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(476): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(488): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(560): warning C4305: =: усечение из "double" к "float"
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(579): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(589): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(592): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+     1>c:\тп сдавать\1\platformer\ssssss\main.cpp(430): warning C4101: pos: неиспользованная локальная переменная
+     1>c:\тп сдавать\1\platformer\ssssss\level.hpp(312): warning C4715: Level::GetObject: значение возвращается не при всех путях выполнения
+       Link:
+         C:\Program Files (x86)\VS\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\тп сдавать\1\Platformer\Debug\Mario.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\SFML-Visual_Studio2015RCx32\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" "sfml-audio-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\тп сдавать\1\Platformer\Debug\Mario.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\тп сдавать\1\Platformer\Debug\Mario.lib" /MACHINE:X86 Debug\main.obj
+         Debug\tinystr.obj
+         Debug\tinyxml.obj
+         Debug\tinyxmlerror.obj
+         Debug\tinyxmlparser.obj
+         ssssss.vcxproj -> C:\тп сдавать\1\Platformer\Debug\Mario.exe
+     1>Сборка проекта "C:\тп сдавать\1\Platformer\ssssss\ssssss.vcxproj" завершена (целевые объекты Build).
+
+Сборка успешно завершена.
+
+Затраченное время: 00:00:01.39

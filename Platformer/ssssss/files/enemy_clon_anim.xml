@@ -22,7 +22,4 @@
   <cut w="41" x="56" y="1" h="57" row="1" col="1"/>
   <cut w="41" x="13" y="1" h="57" row="1" col="1"/>
  </animation>
-  <animation title="hit" delay="150">
-  <cut w="36" x="290" y="182" h="59" row="1" col="1"/>
- </animation>
 </sprites>

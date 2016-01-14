@@ -31,13 +31,13 @@
  <animation title="hit" delay="260">
   <cut w="48" x="27" y="928" h="58" row="1" col="1"/>
  </animation>
- <animation title="shoot" delay="300">
+ <animation title="shoot" delay="260">
   <cut w="26" x="27" y="642" h="67" row="1" col="1"/>
   <cut w="27" x="57" y="647" h="61" row="1" col="1"/>
   <cut w="66" x="86" y="636" h="72" row="1" col="1"/>
   <cut w="76" x="154" y="640" h="71" row="1" col="1"/>
  </animation>
- <animation title="shootAndWalk" delay="300">
+ <animation title="shootAndWalk" delay="260">
   <cut w="77" x="5" y="584" h="43" row="1" col="1"/>
   <cut w="76" x="117" y="585" h="42" row="1" col="1"/>
   <cut w="68" x="197.5" y="585" h="43" row="1" col="1"/>
@@ -52,7 +52,7 @@
   <cut w="49" x="51" y="1160" h="23" row="1" col="1"/>
   <cut w="54" x="105" y="1164" h="17" row="1" col="1"/>
  </animation>
-  <animation title="JumpAttack" delay="340">
+  <animation title="JumpAttack" delay="250">
   <cut w="23" x="25" y="298" h="78" row="1" col="1"/>
   <cut w="58" x="50" y="315" h="63" row="1" col="1"/>
   <cut w="37" x="113" y="345" h="29" row="1" col="1"/>

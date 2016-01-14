@@ -8,18 +8,25 @@
   <cut w="42" x="108" y="60" h="58" row="1" col="1"/>
   <cut w="43" x="63" y="60" h="58" row="1" col="1"/>
  </animation>
-  <animation title="dead" delay="150">
-  <cut w="42" x="284" y="254" h="61" row="1" col="1"/>
-  <cut w="49" x="232.75" y="242.75" h="72" row="1" col="1"/>
-  <cut w="56" x="174" y="265" h="50" row="1" col="1"/>
-  <cut w="54" x="118" y="284" h="31" row="1" col="1"/>
-  <cut w="54" x="62" y="281" h="34" row="1" col="1"/>
-  <cut w="60" x="0" y="288" h="27" row="1" col="1"/>
+ <animation title="dead" delay="210">
+  <cut w="42" x="284" y="243" h="72" row="1" col="1"/>
+  <cut w="49" x="233" y="243" h="72" row="1" col="1"/>
+  <cut w="57" x="174" y="242.75" h="72" row="1" col="1"/>
+  <cut w="54" x="118" y="243" h="72" row="1" col="1"/>
+  <cut w="55" x="61" y="243" h="72" row="1" col="1"/>
+  <cut w="61" x="0.5" y="243" h="72" row="1" col="1"/>
+  <cut w="61" x="0.5" y="243" h="72" row="1" col="1"/>
  </animation>
-  <animation title="attack" delay="180">
+  <animation title="attack" delay="350">
   <cut w="42" x="284" y="1" h="57" row="1" col="1"/>
   <cut w="51" x="99" y="1" h="57" row="1" col="1"/>
   <cut w="41" x="56" y="1" h="57" row="1" col="1"/>
   <cut w="41" x="13" y="1" h="57" row="1" col="1"/>
+ </animation>
+  <animation title="left_hit" delay="150">
+  <cut w="36" x="290" y="182" h="59" row="1" col="1"/>
+ </animation>
+  <animation title="right_hit" delay="150">
+  <cut w="36" x="167" y="180" h="59" row="1" col="1"/>
  </animation>
 </sprites>

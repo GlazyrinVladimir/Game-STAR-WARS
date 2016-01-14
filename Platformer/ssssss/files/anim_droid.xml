@@ -1,0 +1,42 @@
+<!DOCTYPE SpriteDecomposer>
+<sprites image="droid.png" transparentColor="">
+ <animation title="walk" delay="200">
+  <cut w="40" x="322" y="170" h="42" row="1" col="1"/>
+  <cut w="44" x="365" y="169.5" h="42" row="1" col="1"/>
+  <cut w="40" x="411" y="169.5" h="42" row="1" col="1"/>
+ </animation>
+ <animation title="attack" delay="200">
+  <cut w="44" x="274" y="106" h="50" row="1" col="1"/>
+  <cut w="45" x="226.5" y="106" h="50" row="1" col="1"/>
+  <cut w="51" x="174" y="106.25" h="50" row="1" col="1"/>
+ </animation>
+ <animation title="stay" delay="200">
+  <cut w="40" x="322" y="170" h="42" row="1" col="1"/>
+  <cut w="44" x="365" y="169.5" h="42" row="1" col="1"/>
+  <cut w="40" x="411" y="169.5" h="42" row="1" col="1"/>
+ </animation>
+  <animation title="right_hit" delay="150">
+  <cut w="44" x="456" y="0.5" h="51" row="1" col="1"/>
+  <cut w="44" x="501" y="1" h="51" row="1" col="1"/>
+  <cut w="45" x="547" y="0" h="51" row="1" col="1"/>
+  <cut w="45" x="594" y="-0.5" h="51" row="1" col="1"/>
+ </animation>
+  <animation title="left_hit" delay="150">
+  <cut w="43" x="276.25" y="1.75" h="50" row="1" col="1"/>
+  <cut w="44" x="230.75" y="0.5" h="51" row="1" col="1"/>
+  <cut w="44" x="186" y="2" h="50" row="1" col="1"/>
+  <cut w="44" x="140.25" y="0.5" h="52" row="1" col="1"/>
+  <cut w="44" x="95" y="0.75" h="51" row="1" col="1"/>
+  <cut w="44" x="48.75" y="1.75" h="50" row="1" col="1"/>
+  <cut w="46" x="0.5" y="1" h="51" row="1" col="1"/>
+ </animation>
+  <animation title="dead" delay="170">
+  <cut w="15" x="2" y="64" h="38" row="1" col="1"/>
+  <cut w="21" x="37" y="64" h="38" row="1" col="1"/>
+  <cut w="37" x="82" y="114" h="38" row="1" col="1"/>
+  <cut w="31" x="4" y="114" h="38" row="1" col="1"/>
+  <cut w="39" x="41" y="114" h="38" row="1" col="1"/>
+  <cut w="27" x="74" y="64" h="38" row="1" col="1"/>
+  <cut w="37" x="121" y="114" h="38" row="1" col="1"/>
+ </animation>
+</sprites>

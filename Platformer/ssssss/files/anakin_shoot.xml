@@ -1,0 +1,8 @@
+<!DOCTYPE SpriteDecomposer>
+<sprites image="Anakin2.png" transparentColor="FFFFFF">
+ <animation title="1" delay="250">
+  <cut w="41" x="92" y="924" h="65" row="1" col="1"/>
+  <cut w="43" x="138" y="924" h="65" row="1" col="1"/>
+  <cut w="43" x="188" y="924" h="65" row="1" col="1"/>
+ </animation>
+</sprites>

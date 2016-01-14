@@ -44,5 +44,23 @@
     <ClInclude Include="level.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="classes.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="var.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="init_anim_and_obj.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="interaction_with_enemy.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="definition_with_objects.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="check_key.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

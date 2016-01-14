@@ -26,15 +26,16 @@ public:
 
 		currentFrame += speed * time;
 
-		if (currentFrame > frames.size()) { currentFrame -= frames.size();
-		                                    if (!loop) {isPlaying=false; return;}
-		                                  }
+		if (currentFrame > frames.size()) {
+			currentFrame -= frames.size();
+			if (!loop) { isPlaying = false; return; }
+		}
 
 		int i = currentFrame;
-		sprite.setTextureRect( frames[i] );
-		if (flip) sprite.setTextureRect( frames_flip[i] );
-	}
 
+		sprite.setTextureRect(frames[i]);
+		if (flip) sprite.setTextureRect(frames_flip[i]);		
+	}	
 };
 
 
@@ -43,6 +44,7 @@ class AnimationManager
 {
 
 public:
+	int i;
 	String currentAnim;
 	std::map<String, Animation> animList;
 
@@ -111,60 +113,26 @@ public:
 		}
 	}
 
-/*	void loadFromXML2(std::string fileName, Texture &t)
-	{
-		TiXmlDocument animFile(fileName.c_str());
-
-		animFile.LoadFile();
-		TiXmlElement *head;
-		head = animFile.FirstChildElement("sprites");
-
-		TiXmlElement *animElement;
-		animElement = head->FirstChildElement("animation");
-		while (animElement)
-		{
-
-			Animation anim;
-			currentAnim = animElement->Attribute("title");
-			int delay = atoi(animElement->Attribute("delay"));
-			anim.speed = 1.0 / delay; anim.sprite.setTexture(t);
-
-			TiXmlElement *cut;
-			cut = animElement->FirstChildElement("cut");
-			while (cut)
-			{
-				int x = atoi(cut->Attribute("x"));
-				int y = atoi(cut->Attribute("y"));
-				int w = atoi(cut->Attribute("w"));
-				int h = atoi(cut->Attribute("h"));
-
-				anim.frames.push_back(IntRect(x, y, w, h));
-				anim.frames_flip.push_back(IntRect(x + w, y, -w, h));
-				cut = cut->NextSiblingElement("cut");
-			}
-
-			anim.sprite.setOrigin(0, anim.frames[0].height+20);
-
-			animList[currentAnim] = anim;
-			animElement = animElement->NextSiblingElement("animation");
-		}
-	}*/
-
 	void set(String name)
-	{   
-		currentAnim = name; 
-		animList[currentAnim].flip=0;
+	{
+		
+			currentAnim = name;
+			animList[currentAnim].flip = 0;
+		
 	}
 
 	void draw(RenderWindow &window,int x=0, int y=0)
 	{
-		animList[currentAnim].sprite.setPosition(x,y);
-		window.draw( animList[currentAnim].sprite );
+		
+
+			animList[currentAnim].sprite.setPosition(x, y);
+			window.draw(animList[currentAnim].sprite);
+		
 	}
 
 	void flip(bool b=1) {animList[currentAnim].flip = b;}
 
-	void tick(float time)	 {animList[currentAnim].tick(time);}
+	void tick(float time){animList[currentAnim].tick(time);}
 
 	void pause() {animList[currentAnim].isPlaying=false;}
 

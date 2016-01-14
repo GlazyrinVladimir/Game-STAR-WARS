@@ -1,0 +1,25 @@
+<!DOCTYPE SpriteDecomposer>
+<sprites image="droid.png" transparentColor="">
+ <animation title="walk" delay="200">
+  <cut w="40" x="322" y="170" h="42" row="1" col="1"/>
+  <cut w="44" x="365" y="169.5" h="42" row="1" col="1"/>
+  <cut w="40" x="411" y="169.5" h="42" row="1" col="1"/>
+ </animation>
+ <animation title="attack" delay="200">
+  <cut w="51" x="415" y="106" h="50" row="1" col="1"/>
+  <cut w="45" x="367.25" y="106" h="51" row="1" col="1"/>
+  <cut w="45" x="321" y="106" h="51" row="1" col="1"/>
+ </animation>
+ <animation title="stay" delay="200">
+ <cut w="53" x="457" y="162" h="51" row="1" col="1"/>
+  <cut w="43" x="513" y="162" h="50" row="1" col="1"/>
+  <cut w="51" x="558" y="160" h="53" row="1" col="1"/>
+  <cut w="51" x="558" y="160" h="53" row="1" col="1"/>
+ </animation>
+  <animation title="hit" delay="150">
+  <cut w="44" x="456" y="0.5" h="51" row="1" col="1"/>
+  <cut w="44" x="501" y="1" h="51" row="1" col="1"/>
+  <cut w="45" x="547" y="0" h="51" row="1" col="1"/>
+  <cut w="45" x="594" y="-0.5" h="51" row="1" col="1"/>
+ </animation>
+</sprites>

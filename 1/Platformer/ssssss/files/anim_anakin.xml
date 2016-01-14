@@ -1,0 +1,63 @@
+<!DOCTYPE SpriteDecomposer>
+<sprites image="Anakin.png" transparentColor="FFFFFF">
+ <animation title="stay" delay="260">
+  <cut w="33" x="22" y="98" h="60" row="1" col="1"/>
+  <cut w="33" x="57" y="97" h="60" row="1" col="1"/>
+  <cut w="33" x="91" y="96" h="60" row="1" col="1"/>
+ </animation>
+ <animation title="walk" delay="260">
+  <cut w="34" x="15" y="160" h="60" row="1" col="1"/>
+  <cut w="31" x="55" y="160" h="60" row="1" col="1"/>
+  <cut w="35" x="89" y="162" h="59" row="1" col="1"/>
+  <cut w="31" x="127" y="163" h="58" row="1" col="1"/>
+  <cut w="34" x="163" y="162" h="60" row="1" col="1"/>
+ </animation>
+ <animation title="jump" delay="260">
+  <cut w="23" x="17" y="235" h="57" row="1" col="1"/>
+  <cut w="32" x="46" y="248" h="31" row="1" col="1"/>
+  <cut w="34" x="83" y="251" h="25" row="1" col="1"/>
+  <cut w="27" x="125" y="242" h="32" row="1" col="1"/>
+  <cut w="24" x="160" y="236" h="54" row="1" col="1"/>
+  <cut w="23" x="25" y="298" h="78" row="1" col="1"/>
+ </animation>
+ <animation title="climb" delay="260">
+  <cut w="43" x="59" y="990" h="62" row="1" col="1"/>
+ </animation>
+ <animation title="duck" delay="260">
+  <cut w="34" x="21" y="392" h="49" row="1" col="1"/>
+  <cut w="32" x="62" y="391" h="49" row="1" col="1"/>
+  <cut w="27" x="105" y="390" h="52" row="1" col="1"/>
+ </animation>
+ <animation title="hit" delay="260">
+  <cut w="48" x="27" y="928" h="58" row="1" col="1"/>
+ </animation>
+ <animation title="shoot" delay="300">
+  <cut w="26" x="27" y="642" h="67" row="1" col="1"/>
+  <cut w="27" x="57" y="647" h="61" row="1" col="1"/>
+  <cut w="66" x="86" y="636" h="72" row="1" col="1"/>
+  <cut w="76" x="154" y="640" h="71" row="1" col="1"/>
+ </animation>
+ <animation title="shootAndWalk" delay="300">
+  <cut w="77" x="5" y="584" h="43" row="1" col="1"/>
+  <cut w="76" x="117" y="585" h="42" row="1" col="1"/>
+  <cut w="68" x="197.5" y="585" h="43" row="1" col="1"/>
+ </animation>
+ <animation title="supAtt" delay="260">
+  <cut w="41" x="20" y="1070" h="59" row="1" col="1"/>
+  <cut w="42" x="66" y="1063" h="65" row="1" col="1"/>
+  <cut w="43" x="110" y="1062" h="65" row="1" col="1"/>
+ </animation>
+  <animation title="dead" delay="250">
+  <cut w="34" x="13" y="1132" h="52" row="1" col="1"/>
+  <cut w="49" x="51" y="1160" h="23" row="1" col="1"/>
+  <cut w="54" x="105" y="1164" h="17" row="1" col="1"/>
+ </animation>
+  <animation title="JumpAttack" delay="380">
+  <cut w="23" x="25" y="298" h="78" row="1" col="1"/>
+  <cut w="58" x="50" y="315" h="63" row="1" col="1"/>
+  <cut w="58" x="50" y="315" h="63" row="1" col="1"/>
+  <cut w="58" x="50" y="315" h="63" row="1" col="1"/>
+  <cut w="58" x="50" y="315" h="63" row="1" col="1"/>
+  <cut w="37" x="113" y="345" h="29" row="1" col="1"/>
+ </animation>
+</sprites>

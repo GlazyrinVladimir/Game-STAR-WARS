@@ -5,22 +5,30 @@
 #include <list>
 #include "level.hpp"
 #include "anim.hpp"
-#include "init_anim_and_obj.h"
 #include "interaction_with_enemy.h"
+#include "audio.h" 
+#include "init_struct.h"
+#include "var.h"
 
 using namespace sf;
 
-void definition_of_the_enemy(std::list<Entity*>::iterator &it, PLAYER &Player, AnimationManager &anim_bullet, std::list<Entity*> &entities, Level &lvl, float &time, Sound &shoot)
+void definition_of_the_enemy(std::list<Entity*>::iterator &it, PLAYER &Player, AnimationManager &anim_bullet, std::list<Entity*> &entities, Level &lvl, float &time, Sound &shoot, int &bossHp, AnimationManager &anim_shield_l)
 {
 	Entity *enemy = *it;
 
 	if ((*it)->Name == "enemy_clon")
 	{
-		interaction_with_enemy_clon(Player, anim_bullet, entities, it, lvl, time, shoot);
+		interaction_with_enemy_clon(Player, anim_bullet, entities, it, lvl, time, shoot, anim_shield_l);
 	}
 	if ((*it)->Name == "enemy_droid")
 	{
-		interaction_with_enemy_droid(Player, anim_bullet, entities, it, lvl, time, shoot);
+		interaction_with_enemy_droid(Player, anim_bullet, entities, it, lvl, time, shoot, anim_shield_l);
+	}
+	if ((*it)->Name == "enemy_obiwan")
+	{
+		interaction_with_enemy_obiwan(Player, it, lvl, time);
+		bossHp = (*it)->Health;
+		if ((*it)->Health <= 0) { Player.isWin = true; }
 	}
 }
 
@@ -57,44 +65,80 @@ void take_bonus(std::list<Entity*>::iterator &it, PLAYER &Player,  Level &lvl, i
 			if (Player.getRect().intersects((*it)->getRect()))
 			{
 				(*it)->life = false;
-				Player.Health += 10;
+				Player.Health += 15;
 
 				if (Player.Health > 100) { Player.Health = 100; }
 			}
 	}
 	if ((*it)->Name == "Mana")
 	{
-		if (Player.mana != 1)
+		if (Player.mana != 100)
 			if (Player.getRect().intersects((*it)->getRect()))
 			{
 				(*it)->life = false;
-				Player.mana = 1;
+				Player.mana = 100;
 			}
+	}	
+}
+
+void i_will_choke_you(std::list<Entity*>::iterator &it, PLAYER &Player, AnimationManager &anim_choke, std::list<Entity*> &entities, Level &lvl, float &time)
+{
+	if (!Player.isChoke) { (*it)->heIsChoke = false; Player.isLossMana = false; }
+	if (Player.mana == 0) { Player.isChoke = false; }
+	if ((Player.dy == 0) && (Player.mana > 0))
+	{
+		Player.dx = 0; Player.dy = 0;
+		if (Player.isChoke && !Player.doHit)
+		{
+			Player.doHit = true;					
+			if (Player.dir == 1) entities.push_back(new get_choke(anim_choke, lvl, float(Player.x), float(Player.y + 18), 1));
+			else entities.push_back(new get_choke(anim_choke, lvl, float(Player.x), float(Player.y + 18), 0));
+		}
 	}
+
+	for (std::list<Entity*>::iterator it2 = entities.begin(); it2 != entities.end(); it2++)
+		if ((*it2)->Name == "choke")
+			if ((*it2)->life == true)
+				if ((*it2)->getRect().intersects((*it)->getRect()) && (*it)->Health > 0 && (*it)->alive)
+				{
+					Player.isLossMana = true;
+					(*it)->heIsChoke = true;
+					(*it2)->life = false;
+				}
 	
 }
 
 void player_sup_attack(std::list<Entity*>::iterator &it, PLAYER &Player, AnimationManager &anim_light, std::list<Entity*> &entities, Level &lvl, float &time)
 {
-	if ((Keyboard::isKeyPressed(Keyboard::LAlt)) && (Player.dy == 0))
+	if ((Keyboard::isKeyPressed(Keyboard::K)) && (Player.dy == 0))
 	{
-		if (Player.mana == 1)
+		
+		if (Player.mana >= 40 && Player.isDoSupAttack)
 		{
-			if (Player.dir == 1) entities.push_back(new light(anim_light, lvl, Player.x, Player.y + 18, 1));
-			else entities.push_back(new light(anim_light, lvl, Player.x, Player.y + 18, 0));
-			Player.mana = 0;
+			Player.dy = 0;
+			if (Player.dir == 1) entities.push_back(new light(anim_light, lvl, float(Player.x), float(Player.y + 18), 1));
+			else entities.push_back(new light(anim_light, lvl, float(Player.x), float(Player.y + 18), 0));
+			Player.isDoSupAttack = false;
 		}
+		else  if (Player.mana < 40) { Player.isDoSupAttack = true; } 
+				else Player.isDoSupAttack = false;
 	}
 	for (std::list<Entity*>::iterator it2 = entities.begin(); it2 != entities.end(); it2++)
 	{
 		if ((*it2)->Name == "light")
 			if ((*it2)->life == true)
 			{
-				if ((*it2)->getRect().intersects((*it)->getRect()))
+				if ((*it2)->getRect().intersects((*it)->getRect()) && (*it)->Health > 0)
 				{
 					if (((*it)->Name == "enemy_clon") || ((*it)->Name == "enemy_droid") || (((*it)->Name == "enemy_clon") && ((*it)->Name == "enemy_droid")))
 					{
 						(*it)->Health -= 100;
+						(*it2)->Health = 0;
+					}
+					if ((*it)->Name == "enemy_obiwan" && !(*it)->hit)
+					{
+						(*it)->Health -= 50;
+						(*it)->hit = true;
 						(*it2)->Health = 0;
 					}
 				}
@@ -102,23 +146,67 @@ void player_sup_attack(std::list<Entity*>::iterator &it, PLAYER &Player, Animati
 	}
 }
 
-void is_enemy_alive(std::list<Entity*>::iterator &it, std::list<Entity*> &entities, float &time, Level lvl, AnimationManager anim_mana, int &dead_enemy)
+void after_dead(std::list<Entity*> &entities, std::list<Entity*>::iterator &it, Level lvl, AnimationManager anim_mana, int &dead_enemy, Sound &music)
 {
-	int randBonus;
+	randBonus = rand() % 12;
+	if (randBonus == 1 && (*it)->giveBonus == true)
+	{
+		entities.push_back(new Bonus(anim_mana, lvl, "Mana", float((*it)->x), float((*it)->y))); 
+	}
+	(*it)->giveBonus = false;
+	is_life_it(it, music);
+}
+
+void check_obj(std::list<Entity*>::iterator &it, PLAYER &Player, AnimationManager &anim_bullet, std::list<Entity*> &entities, Level &lvl, float &time, Sound &shoot, int &bossHp, AnimationManager &anim_light, int levelNumber, AnimationManager &anim_shield_l, AnimationManager &anim_choke)
+{
+	for (it = entities.begin();it != entities.end();it++)
+	{
+		player_sup_attack(it, Player, anim_light, entities, lvl, time);
+		
+		i_will_choke_you(it, Player, anim_choke, entities, lvl, time);
+
+		definition_of_the_enemy(it, Player, anim_bullet, entities, lvl, time, shoot, bossHp, anim_shield_l);
+
+		definition_of_the_platform(it, Player, entities, lvl, time);
+
+		take_bonus(it, Player, lvl, levelNumber);
+
+		if ((*it)->Health <= 0) continue;
+	}
+}
+
+void is_enemy_alive(std::list<Entity*>::iterator &it, std::list<Entity*> &entities, float &time, Level lvl, AnimationManager anim_mana, int &dead_enemy, init_sounds &sound, PLAYER &Player)
+{
 	for (it = entities.begin();it != entities.end();)
 	{
 		Entity *b = *it;
 		b->update(time);
+		if (b->Health < 0) { Player.isLossMana = false; }
+		if (!(b->Health > 0))
+		{
+			if ((*it)->Name == "enemy_clon")
+			{
+				after_dead(entities, it, lvl, anim_mana, dead_enemy, sound.deathClon);
+			}
+			if ((*it)->Name == "enemy_droid")
+			{
+				after_dead(entities, it, lvl, anim_mana, dead_enemy, sound.deathDroid);
+			}
+			if ((*it)->Name == "enemy_obiwan")
+			{
+				sound.levelThird.stop();
+				after_dead(entities, it, lvl, anim_mana, dead_enemy, sound.deadObi);
+			}
+		}
 		if (b->life == false) 
 		{ 	
-			std::cout << "new (*it)->x" << dead_enemy << "\n";
-			randBonus = rand() % 10;
 			if (((*it)->Name == "enemy_droid") || ((*it)->Name == "enemy_clon") || ((*it)->Name == "enemy_droid") && ((*it)->Name == "enemy_clon"))
 			{
 				dead_enemy++;
 				if (randBonus == 1)
-				entities.push_back(new Bonus(anim_mana, lvl, "Mana", (*it)->x, (*it)->y));
+				entities.push_back(new Bonus(anim_mana, lvl, "Mana", float((*it)->x), float((*it)->y)));
 			}
+			
 			it = entities.erase(it);	
 			delete b;	
 		}

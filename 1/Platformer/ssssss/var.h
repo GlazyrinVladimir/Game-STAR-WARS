@@ -3,5 +3,11 @@
 
 using namespace sf;
 
-static const sf::Vector2f WINDOW_SIZE_MENU = { 1000, 768 };
-static const sf::Vector2f WINDOW_SIZE_GAME = { 1500, 800 };
+static sf::Vector2f WINDOW_SIZE_GAME = { 1500, 800 };
+int enemiesNumber = 0;
+bool wasInMenu = false;
+int randBonus;
+float attack_timer = 0;
+int dead_enemy = 0;
+int bossHp = 300;
+int levelNumber = 1;

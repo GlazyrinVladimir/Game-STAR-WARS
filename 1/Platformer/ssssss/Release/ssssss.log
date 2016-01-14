@@ -1,0 +1,9 @@
+﻿  main.cpp
+c:\иип\1\platformer\ssssss\classes.h(607): warning C4244: +=: преобразование "float" в "int", возможна потеря данных
+c:\иип\1\platformer\ssssss\check_key.h(24): warning C4244: +=: преобразование "float" в "int", возможна потеря данных
+  Создание кода
+  1 of 1402 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  ssssss.vcxproj -> C:\ИИП\1\Platformer\Release\Mario.exe

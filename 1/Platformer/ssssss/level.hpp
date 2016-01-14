@@ -24,7 +24,7 @@ struct Object
 
 struct Layer
 {
-    int opacity;
+    float opacity;
     std::vector<sf::Sprite> tiles;
 };
 
@@ -39,7 +39,7 @@ public:
 	sf::Vector2i GetTileSize();
 
 private:
-    int width, height, tileWidth, tileHeight;
+    float width, height, tileWidth, tileHeight;
     int firstTileID;
     sf::Rect<float> drawingBounds;
     sf::Texture tilesetImage;
@@ -57,7 +57,7 @@ int Object::GetPropertyInt(std::string name)
 
 float Object::GetPropertyFloat(std::string name)
 {
-    return strtod(properties[name].c_str(), NULL);
+    return float(strtod(properties[name].c_str(), NULL));
 }
 
 std::string Object::GetPropertyString(std::string name)
@@ -82,10 +82,10 @@ bool Level::LoadFromFile(std::string filename)
 
 	// Пример карты: <map version="1.0" orientation="orthogonal"
 	// width="10" height="10" tilewidth="34" tileheight="34">
-    width = atoi(map->Attribute("width"));
-    height = atoi(map->Attribute("height"));
-    tileWidth = atoi(map->Attribute("tilewidth"));
-    tileHeight = atoi(map->Attribute("tileheight"));
+    width = float(atoi(map->Attribute("width")));
+    height = float(atoi(map->Attribute("height")));
+    tileWidth = float(atoi(map->Attribute("tilewidth")));
+    tileHeight = float(atoi(map->Attribute("tileheight")));
 
 	// Берем описание тайлсета и идентификатор первого тайла
     TiXmlElement *tilesetElement;
@@ -113,8 +113,8 @@ bool Level::LoadFromFile(std::string filename)
     tilesetImage.setSmooth(false);
 
 	// Получаем количество столбцов и строк тайлсета
-	int columns = tilesetImage.getSize().x / tileWidth;
-    int rows = tilesetImage.getSize().y / tileHeight;
+	int columns = int(tilesetImage.getSize().x / tileWidth);
+    int rows = int(tilesetImage.getSize().y / tileHeight);
 
 	// Вектор из прямоугольников изображений (TextureRect)
     std::vector<sf::Rect<int>> subRects;
@@ -124,10 +124,10 @@ bool Level::LoadFromFile(std::string filename)
 	{
 		sf::Rect<int> rect;
 
-		rect.top = y * tileHeight;
-		rect.height = tileHeight;
-		rect.left = x * tileWidth;
-		rect.width = tileWidth;
+		rect.top = int(y * tileHeight);
+		rect.height = int(tileHeight);
+		rect.left = int(x * tileWidth);
+		rect.width = int(tileWidth);
 
 		subRects.push_back(rect);
 	}
@@ -142,7 +142,7 @@ bool Level::LoadFromFile(std::string filename)
 		// Если присутствует opacity, то задаем прозрачность слоя, иначе он полностью непрозрачен
         if (layerElement->Attribute("opacity") != NULL)
         {
-            float opacity = strtod(layerElement->Attribute("opacity"), NULL);
+            float opacity = float(strtod(layerElement->Attribute("opacity"), NULL));
             layer.opacity = 255 * opacity;
         }
         else
@@ -169,8 +169,8 @@ bool Level::LoadFromFile(std::string filename)
             return false;
         }
 
-        int x = 0;
-        int y = 0;
+        float x = 0;
+        float y = 0;
 
         while(tileElement)
         {
@@ -184,7 +184,7 @@ bool Level::LoadFromFile(std::string filename)
                 sprite.setTexture(tilesetImage);
 				sprite.setTextureRect(subRects[subRectToUse]);
                 sprite.setPosition(x * tileWidth, y * tileHeight);
-                sprite.setColor(sf::Color(255, 255, 255, layer.opacity));
+                sprite.setColor(sf::Color(255, 255, 255, int(layer.opacity)));
 
                 layer.tiles.push_back(sprite);
             }
@@ -232,10 +232,10 @@ bool Level::LoadFromFile(std::string filename)
                 {
                     objectName = objectElement->Attribute("name");
                 }
-                int x = atoi(objectElement->Attribute("x"));
-                int y = atoi(objectElement->Attribute("y"));
+                float x = float(atoi(objectElement->Attribute("x")));
+                float y = float(atoi(objectElement->Attribute("y")));
 
-				int width, height;
+				float width, height;
 
 				sf::Sprite sprite;
                 sprite.setTexture(tilesetImage);
@@ -244,13 +244,13 @@ bool Level::LoadFromFile(std::string filename)
 
 				if (objectElement->Attribute("width") != NULL)
 				{
-					width = atoi(objectElement->Attribute("width"));
-					height = atoi(objectElement->Attribute("height"));
+					width = float(atoi(objectElement->Attribute("width")));
+					height = float(atoi(objectElement->Attribute("height")));
 				}
 				else
 				{
-					width = subRects[atoi(objectElement->Attribute("gid")) - firstTileID].width;
-					height = subRects[atoi(objectElement->Attribute("gid")) - firstTileID].height;
+					width = float(subRects[atoi(objectElement->Attribute("gid")) - firstTileID].width);
+					height = float(subRects[atoi(objectElement->Attribute("gid")) - firstTileID].height);
 					sprite.setTextureRect(subRects[atoi(objectElement->Attribute("gid")) - firstTileID]);
 				}
 
@@ -307,16 +307,18 @@ bool Level::LoadFromFile(std::string filename)
 Object Level::GetObject(std::string name)
 {
 	// Только первый объект с заданным именем
-    for (int i = 0; i < objects.size(); i++)
+    for (unsigned int i = 0; i < objects.size(); i++)
         if (objects[i].name == name)
             return objects[i];
+	Object result;
+	return result;
 }
 
 std::vector<Object> Level::GetObjects(std::string name)
 {
 	// Все объекты с заданным именем
 	std::vector<Object> vec;
-    for(int i = 0; i < objects.size(); i++)
+    for(unsigned int i = 0; i < objects.size(); i++)
         if(objects[i].name == name)
 			vec.push_back(objects[i]);
 
@@ -332,14 +334,14 @@ std::vector<Object> Level::GetAllObjects()
 
 sf::Vector2i Level::GetTileSize()
 {
-	return sf::Vector2i(tileWidth, tileHeight);
+	return sf::Vector2i(int(tileWidth), int(tileHeight));
 }
 
 void Level::Draw(sf::RenderWindow &window)
 {
 	// Рисуем все тайлы (объекты НЕ рисуем!)
-	for(int layer = 0; layer < layers.size(); layer++)
-		for(int tile = 0; tile < layers[layer].tiles.size(); tile++)
+	for(unsigned int layer = 0; layer < layers.size(); layer++)
+		for(unsigned int tile = 0; tile < layers[layer].tiles.size(); tile++)
 			window.draw(layers[layer].tiles[tile]);
 }
 

@@ -50,9 +50,6 @@
     <ClInclude Include="var.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="init_anim_and_obj.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="interaction_with_enemy.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -66,6 +63,21 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="View.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="init_struct.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="init_obj.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="audio.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="draw.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

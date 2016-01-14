@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="32" tileheight="32" nextobjectid="99">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="32" tileheight="32" nextobjectid="172">
  <tileset firstgid="1" name="1" tilewidth="32" tileheight="32" tilecount="120">
   <image source="map.png" width="320" height="384"/>
  </tileset>
@@ -1156,10 +1156,10 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="15"/>
+   <tile gid="16"/>
+   <tile gid="17"/>
+   <tile gid="18"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1459,10 +1459,10 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="15"/>
+   <tile gid="16"/>
+   <tile gid="17"/>
+   <tile gid="18"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1863,10 +1863,10 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="15"/>
+   <tile gid="16"/>
+   <tile gid="17"/>
+   <tile gid="18"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2380,20 +2380,11 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="4"/>
-   <tile gid="5"/>
-   <tile gid="6"/>
-   <tile gid="7"/>
-   <tile gid="8"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="4"/>
-   <tile gid="5"/>
-   <tile gid="6"/>
-   <tile gid="6"/>
-   <tile gid="7"/>
-   <tile gid="8"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2403,6 +2394,15 @@
    <tile gid="6"/>
    <tile gid="7"/>
    <tile gid="8"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="15"/>
@@ -5011,29 +5011,27 @@
   </data>
  </layer>
  <objectgroup name="Слой объектов 1">
-  <object id="1" name="solid" x="0" y="224" width="224" height="32"/>
-  <object id="2" name="solid" x="288" y="288" width="384" height="32"/>
+  <object id="1" name="solid" x="0" y="228" width="209" height="60"/>
+  <object id="2" name="solid" x="296" y="294" width="366" height="32"/>
   <object id="3" name="solid" x="576" y="224" width="64" height="32"/>
   <object id="4" name="solid" x="736" y="160" width="224" height="32"/>
   <object id="5" name="solid" x="640" y="192" width="96" height="32"/>
-  <object id="6" name="solid" x="800" y="416" width="128" height="32"/>
-  <object id="7" name="solid" x="992" y="480" width="32" height="32"/>
+  <object id="6" name="solid" x="808" y="420" width="107" height="32"/>
+  <object id="7" name="solid" x="996" y="480" width="28" height="32"/>
   <object id="8" name="solid" x="448" y="704" width="704" height="32"/>
   <object id="9" name="solid" x="640" y="736" width="384" height="32"/>
-  <object id="10" name="solid" x="192" y="672" width="224" height="32"/>
-  <object id="11" name="solid" x="672" y="512" width="256" height="32"/>
-  <object id="12" name="solid" x="928" y="544" width="96" height="32"/>
+  <object id="10" name="solid" x="192" y="676" width="212" height="32"/>
+  <object id="11" name="solid" x="672" y="512" width="352" height="32"/>
+  <object id="12" name="solid" x="928" y="544" width="95" height="32"/>
   <object id="13" name="solid" x="992" y="576" width="32" height="32"/>
   <object id="14" name="solid" x="64" y="480" width="608" height="32"/>
-  <object id="15" name="solid" x="1120" y="320" width="256" height="32"/>
+  <object id="15" name="solid" x="1120" y="324" width="245" height="32"/>
   <object id="16" name="solid" x="1120" y="352" width="128" height="352"/>
   <object id="17" name="solid" x="1376" y="672" width="288" height="32"/>
-  <object id="18" name="solid" x="1664" y="672" width="96" height="32"/>
+  <object id="18" name="solid" x="1662" y="683" width="64" height="21"/>
   <object id="19" name="solid" x="1504" y="800" width="768" height="32"/>
-  <object id="20" name="solid" x="2304" y="736" width="160" height="32"/>
-  <object id="21" name="solid" x="2560" y="736" width="192" height="32"/>
-  <object id="22" name="solid" x="2848" y="736" width="192" height="32"/>
-  <object id="23" name="solid" x="3104" y="736" width="96" height="32"/>
+  <object id="21" name="solid" x="2560" y="736" width="192" height="64"/>
+  <object id="23" name="solid" x="3104" y="736" width="96" height="64"/>
   <object id="24" name="solid" x="1472" y="832" width="224" height="32"/>
   <object id="25" name="solid" x="1440" y="864" width="224" height="32"/>
   <object id="26" name="solid" x="1376" y="896" width="224" height="32"/>
@@ -5044,16 +5042,6 @@
   <object id="32" name="SlopeLeft" x="224" y="224" width="64" height="64"/>
   <object id="33" name="SlopeLeft" x="416" y="672" width="32" height="32"/>
   <object id="34" name="SlopeLeft" x="928" y="416" width="64" height="64"/>
-  <object id="58" name="back" x="576" y="192" width="33" height="96"/>
-  <object id="59" name="back" x="256" y="192" width="33" height="96"/>
-  <object id="60" name="back" x="928" y="64" width="33" height="96"/>
-  <object id="61" name="back" x="736" y="64" width="33" height="96"/>
-  <object id="62" name="back" x="1120" y="608" width="33" height="96"/>
-  <object id="63" name="back" x="448" y="608" width="33" height="96"/>
-  <object id="64" name="back" x="32" y="832" width="33" height="96"/>
-  <object id="65" name="back" x="1376" y="832" width="33" height="96"/>
-  <object id="66" name="back" x="1504" y="736" width="33" height="96"/>
-  <object id="67" name="back" x="2240" y="736" width="33" height="96"/>
   <object id="69" name="nextLevel" x="3104" y="608" width="96" height="128"/>
   <object id="76" name="enemy_droid" gid="156" x="416" y="250" width="32" height="32"/>
   <object id="77" name="enemy_droid" gid="156" x="832" y="122" width="32" height="32"/>
@@ -5063,15 +5051,52 @@
   <object id="84" name="enemy_clon" gid="156" x="1888" y="750" width="32" height="32"/>
   <object id="85" name="enemy_clon" gid="156" x="1120" y="878" width="32" height="32"/>
   <object id="86" name="enemy_clon" gid="156" x="864" y="878" width="32" height="32"/>
-  <object id="87" name="enemy_clon" gid="156" x="672" y="878" width="32" height="32"/>
   <object id="88" name="enemy_clon" gid="156" x="192" y="878" width="32" height="32"/>
   <object id="89" name="enemy_clon" gid="156" x="384" y="878" width="32" height="32"/>
-  <object id="90" name="enemy_clon" gid="156" x="2624" y="686" width="32" height="32"/>
-  <object id="91" name="back" x="2528" y="640" width="33" height="96"/>
-  <object id="92" name="back" x="2752" y="640" width="33" height="96"/>
-  <object id="94" name="player" x="128" y="128" width="32" height="32"/>
   <object id="95" name="health" x="1120" y="256" width="32" height="32"/>
   <object id="96" name="health" x="288" y="608" width="32" height="32"/>
   <object id="98" name="health" x="608" y="864" width="32" height="32"/>
+  <object id="99" name="fall" x="2272" y="864" width="832" height="32"/>
+  <object id="102" name="MovingPlatform" gid="289" x="2336" y="768" width="32" height="32"/>
+  <object id="103" name="MovingPlatform" gid="289" x="2976" y="768" width="32" height="32"/>
+  <object id="111" name="enemy_clon" gid="156" x="2624" y="686" width="32" height="32"/>
+  <object id="112" name="back_l" x="288" y="192" width="33" height="96"/>
+  <object id="114" name="back_l" x="736" y="64" width="33" height="96"/>
+  <object id="115" name="back_l" x="448" y="608" width="33" height="96"/>
+  <object id="116" name="back_l" x="32" y="832" width="33" height="96"/>
+  <object id="117" name="back_l" x="1504" y="704" width="33" height="96"/>
+  <object id="118" name="back_l" x="2560" y="640" width="33" height="96"/>
+  <object id="119" name="back_r" x="544" y="192" width="33" height="96"/>
+  <object id="120" name="back_r" x="928" y="64" width="33" height="96"/>
+  <object id="121" name="back_r" x="1120" y="608" width="33" height="96"/>
+  <object id="122" name="back_r" x="1376" y="832" width="33" height="96"/>
+  <object id="123" name="back_r" x="2208" y="704" width="33" height="96"/>
+  <object id="124" name="back_r" x="2720" y="640" width="33" height="96"/>
+  <object id="125" name="back_l" x="2240" y="704" width="33" height="96"/>
+  <object id="126" name="back_r" x="2528" y="704" width="33" height="96"/>
+  <object id="127" name="back_l" x="2752" y="704" width="33" height="96"/>
+  <object id="128" name="back_r" x="3072" y="704" width="33" height="96"/>
+  <object id="129" name="enemy_clon" gid="156" x="1824" y="526" width="32" height="32"/>
+  <object id="132" name="back_l" x="1728" y="480" width="33" height="96"/>
+  <object id="133" name="back_l" x="1600" y="384" width="33" height="64"/>
+  <object id="135" name="back_r" x="1856" y="480" width="33" height="96"/>
+  <object id="136" name="back_r" x="1728" y="352" width="33" height="96"/>
+  <object id="146" name="enemy_clon" gid="156" x="1696" y="398" width="32" height="32"/>
+  <object id="155" name="enemy_clon" gid="156" x="1600" y="302" width="32" height="32"/>
+  <object id="156" name="back_l" x="1504" y="256" width="33" height="96"/>
+  <object id="157" name="solid" x="1536" y="360" width="128" height="21"/>
+  <object id="158" name="back_r" x="1632" y="256" width="33" height="96"/>
+  <object id="159" name="solid" x="1152" y="384" width="245" height="32"/>
+  <object id="160" name="solid" x="1184" y="416" width="245" height="32"/>
+  <object id="161" name="solid" x="1216" y="452" width="245" height="32"/>
+  <object id="162" name="solid" x="1248" y="480" width="245" height="32"/>
+  <object id="163" name="solid" x="1280" y="516" width="245" height="32"/>
+  <object id="164" name="solid" x="1312" y="548" width="245" height="32"/>
+  <object id="165" name="solid" x="1344" y="580" width="245" height="32"/>
+  <object id="166" name="solid" x="1376" y="612" width="245" height="32"/>
+  <object id="167" name="solid" x="1408" y="644" width="245" height="32"/>
+  <object id="169" name="solid" x="1760" y="584" width="128" height="21"/>
+  <object id="170" name="solid" x="1632" y="456" width="128" height="21"/>
+  <object id="171" name="player" x="96" y="128" width="32" height="32"/>
  </objectgroup>
 </map>

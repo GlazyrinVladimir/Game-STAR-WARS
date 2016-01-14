@@ -20,7 +20,7 @@ void getPlayerCoordinateForView(float x, float y, RenderWindow &window, int &lev
 	}
 	if (levelNumber == 3)
 	{
-		if (x < 200) tempX = 200;//убираем из вида левую сторону
+		if (x < 205) tempX = 205;//убираем из вида левую сторону
 		if (x > 760) tempX = 760;//убираем из вида правую сторону
 		if (y < 130) tempY = 130;//верхнюю сторону
 		if (y > 500) tempY = 500;//нижнюю сторону

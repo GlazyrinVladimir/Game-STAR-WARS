@@ -1,0 +1,10 @@
+<!DOCTYPE SpriteDecomposer>
+<sprites image="Anakin2.png" transparentColor="">
+ <animation title="Default animation" delay="150">
+  <cut w="34" x="15" y="159" h="61" row="1" col="1"/>
+  <cut w="31" x="55" y="160" h="60" row="1" col="1"/>
+  <cut w="35" x="89" y="161" h="60" row="1" col="1"/>
+  <cut w="31" x="127" y="162.5" h="58" row="1" col="1"/>
+  <cut w="34" x="162.75" y="162.75" h="59" row="1" col="1"/>
+ </animation>
+</sprites>

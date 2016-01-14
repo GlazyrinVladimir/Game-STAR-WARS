@@ -1,0 +1,10 @@
+﻿  tinyxmlparser.cpp
+  tinyxmlerror.cpp
+  tinyxml.cpp
+  tinystr.cpp
+  main.cpp
+c:\запасная копия игры\10.01.16\иип\1\platformer\ssssss\level.hpp(187): warning C4244: аргумент: преобразование "float" в "sf::Uint8", возможна потеря данных
+c:\запасная копия игры\10.01.16\иип\1\platformer\ssssss\main.cpp(114): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+c:\запасная копия игры\10.01.16\иип\1\platformer\ssssss\main.cpp(227): warning C4244: аргумент: преобразование "float" в "unsigned int", возможна потеря данных
+  Создание кода...
+  ssssss.vcxproj -> C:\ЗАПАСНАЯ КОПИЯ ИГРЫ\10.01.16\ИИП\1\Platformer\Debug\Mario.exe
